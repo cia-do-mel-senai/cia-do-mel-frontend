@@ -1,0 +1,20 @@
+.cabecalho-container {
+  width: 100vw;
+  height: 10vh;
+  background-color: var(--cor-preto);
+  color: var(--cor-amarelo);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cabecalho-titulo {
+  margin: 0;
+  transform: translateX(-12px);
+  font-size: 1.5rem;
+}
+
+.cabecalho-logo {
+  display: flex;
+  align-items: center;
+}
