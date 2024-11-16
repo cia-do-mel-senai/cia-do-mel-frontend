@@ -1,4 +1,4 @@
-import "./ProdutoDestaque.Css";
+import "./ProdutoDestaque.css";
 import { IoMdSearch } from "react-icons/io";
 
 const ProdutoDestaque = ({ imagem, nome }) => {
