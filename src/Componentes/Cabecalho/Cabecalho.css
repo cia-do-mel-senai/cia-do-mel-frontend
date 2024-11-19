@@ -14,7 +14,35 @@
   font-size: 1.5rem;
 }
 
+.cabecalho-pesquisar {
+  display: flex;
+  align-items: center;
+}
+
+.pesquisar-icone {
+  position: absolute;
+  margin: 5px;
+  color: grey;
+}
+
+.cabecalho-pesquisar input {
+  padding: 2px;
+  padding-left: 20px;
+  border-radius: 20px;
+  border: 1px grey solid;
+}
+
+.cabecalho-pesquisar input::placeholder {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
 .cabecalho-logo {
   display: flex;
   align-items: center;
+  margin-left: 10px;
+}
+
+.cabecalho-icone {
+  margin-right: 10px;
 }

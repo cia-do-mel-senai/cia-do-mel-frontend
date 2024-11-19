@@ -41,6 +41,7 @@ const Principal = () => {
             fontSize: "1.3rem",
             fontWeight: "bold",
             marginTop: "15px",
+            border: "black 6px solid",
           }}
         >
           Ver Todos
