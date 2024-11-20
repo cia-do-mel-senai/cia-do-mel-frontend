@@ -1,7 +1,9 @@
+import Menu from "../Menu/Menu";
 import "./Cabecalho.css";
-import { FaBars } from "react-icons/fa";
+
 import logo from "./logo.svg";
 import { IoMdSearch } from "react-icons/io";
+import { MdOutlineShoppingCart } from "react-icons/md";
 const Cabecalho = () => {
   return (
     <div className="cabecalho-container">
@@ -12,9 +14,10 @@ const Cabecalho = () => {
         <IoMdSearch className="pesquisar-icone" />
         <input type="text" placeholder="ZzZzz....." />
       </div>
-      <div className="cabecalho-icone">
-        <FaBars size={25} />
+      <div>
+        <MdOutlineShoppingCart size={30} />
       </div>
+      <Menu />
     </div>
   );
 };

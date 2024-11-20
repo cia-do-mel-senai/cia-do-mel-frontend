@@ -36,7 +36,6 @@ const Principal = () => {
             backgroundColor: "var(--cor-amarelo)",
             padding: "10px",
             width: "70%",
-            border: "none",
             borderRadius: "20px",
             fontSize: "1.3rem",
             fontWeight: "bold",

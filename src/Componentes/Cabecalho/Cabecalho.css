@@ -17,6 +17,7 @@
 .cabecalho-pesquisar {
   display: flex;
   align-items: center;
+  width: 35%;
 }
 
 .pesquisar-icone {
@@ -30,6 +31,7 @@
   padding-left: 20px;
   border-radius: 20px;
   border: 1px grey solid;
+  width: 100%;
 }
 
 .cabecalho-pesquisar input::placeholder {
@@ -41,8 +43,4 @@
   display: flex;
   align-items: center;
   margin-left: 10px;
-}
-
-.cabecalho-icone {
-  margin-right: 10px;
 }
