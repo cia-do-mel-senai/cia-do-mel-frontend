@@ -16,7 +16,8 @@ export default defineConfig({
       manifest: {
         name: "Cia do Mel",
         short_name: "Cia do Mel",
-        description: "",
+        description:
+          "Loja especializada em mel natural, orgânico e de alta qualidade, diretamente dos apicultores para você. Oferecemos produtos 100% naturais e sustentáveis.",
         theme_color: "#323232",
         background_color: "#ffffff",
         display: "standalone",
