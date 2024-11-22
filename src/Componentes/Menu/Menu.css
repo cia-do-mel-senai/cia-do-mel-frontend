@@ -4,7 +4,7 @@
 .menu {
   position: absolute;
   right: 0%;
-  width: 100px;
+  width: 125px;
   height: fit-content;
   background-color: var(--cor-amarelo);
   opacity: 0;
@@ -17,6 +17,7 @@
 .menu-animacao {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .menu ul {
@@ -35,7 +36,6 @@
   font-weight: bold;
   width: fit-content;
   padding-bottom: 3px;
-  font-size: 0.8rem;
 }
 .menu li:last-child {
   border-bottom: none;

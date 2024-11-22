@@ -1,0 +1,40 @@
+.login-usuario-container {
+  height: 80vh;
+  background-color: var(--cor-fundo);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  overflow: auto;
+}
+.login-usuario-inputs {
+  width: 80%;
+  height: fit-content;
+  background-color: var(--cor-preto);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  align-items: center;
+  flex-direction: column;
+}
+.login-usuario-inputs input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 30px;
+  border: none;
+  margin-bottom: 20px;
+}
+.login-usuario-inputs label {
+  width: 80%;
+  text-align: left;
+}
+.login-usuario-inputs button {
+  width: 40%;
+  background-color: var(--cor-amarelo);
+  border-radius: 30px;
+  border: none;
+  padding: 5px;
+  margin-bottom: 20px;
+}
