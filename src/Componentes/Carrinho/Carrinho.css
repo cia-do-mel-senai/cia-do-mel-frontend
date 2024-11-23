@@ -20,7 +20,7 @@
   top: 0%;
   width: 60%;
   height: 100%;
-  background-color: white;
+  background-color: var(--cor-preto);
   opacity: 0;
   pointer-events: none;
   transition: ease-in 500ms;
@@ -46,8 +46,9 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background-color: #f4f4f4;
+  background-color: var(--cor-amarelo);
   border-radius: 5px;
+  color: black;
 }
 
 .produto-imagem {
