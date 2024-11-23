@@ -1,0 +1,29 @@
+.carrinho-fundo {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.719);
+  transition: ease-in 1000ms;
+  z-index: 1000;
+}
+.carrinho {
+  position: fixed;
+  right: 0%;
+  top: 0%;
+  width: 60%;
+  height: 100%;
+  background-color: var(--cor-preto);
+  opacity: 0;
+  pointer-events: none;
+  transition: ease-in 500ms;
+  transform: translateX(20px);
+  color: black;
+  z-index: 1001;
+}
+.carrinho-animacao {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}

@@ -1,4 +1,4 @@
-.container-menu {
+.menu-container {
   margin-right: 10px;
 }
 .menu {
@@ -39,4 +39,11 @@
 }
 .menu li:last-child {
   border-bottom: none;
+}
+.menu-div-fora {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0%;
+  left: 0%;
 }

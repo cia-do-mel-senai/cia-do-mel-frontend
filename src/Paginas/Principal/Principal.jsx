@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import ProdutoDestaque from "../../Componentes/ProdutoDestaque/ProdutoDestaque";
 import "./Principal.css";
 
 const Principal = () => {
+  const navigate = useNavigate();
   return (
     <div className="principal-container">
       <div className="produtos-destaque-principal">
@@ -42,6 +44,7 @@ const Principal = () => {
             marginTop: "15px",
             border: "black 6px solid",
           }}
+          onClick={() => navigate("/catalogo-produto")}
         >
           Ver Todos
         </button>

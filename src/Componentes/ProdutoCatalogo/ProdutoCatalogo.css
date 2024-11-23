@@ -1,0 +1,38 @@
+.produto-catalogo-container {
+  width: 35%;
+  background-color: black;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  max-height: 200px;
+  flex-direction: column;
+  align-items: center;
+  border: var(--cor-amarelo) 3px solid;
+  margin-top: 10px;
+  margin: 5px;
+}
+
+.produto-catalogo-container img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.produto-catalogo-container p {
+  margin: 5px;
+  text-align: center;
+}
+
+.produto-catalogo-container button {
+  border: none;
+  padding: 5px;
+  width: 90%;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: var(--cor-amarelo);
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

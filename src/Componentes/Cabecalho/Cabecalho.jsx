@@ -4,7 +4,8 @@ import "./Cabecalho.css";
 
 import logo from "./logo.svg";
 import { IoMdSearch } from "react-icons/io";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import Carrinho from "../Carrinho/Carrinho";
+
 const Cabecalho = () => {
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ const Cabecalho = () => {
         <input type="text" placeholder="ZzZzz....." />
       </div>
       <div>
-        <MdOutlineShoppingCart size={30} />
+        <Carrinho />
       </div>
       <Menu />
     </div>
