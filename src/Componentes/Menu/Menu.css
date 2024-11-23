@@ -35,7 +35,8 @@
   margin-left: 10px;
   font-weight: bold;
   width: fit-content;
-  padding-bottom: 3px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 .menu li:last-child {
   border-bottom: none;

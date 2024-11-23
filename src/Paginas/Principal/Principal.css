@@ -18,7 +18,6 @@
   color: var(--cor-amarelo);
   border-radius: 40px;
   margin-bottom: 20px;
-  border: var(--cor-amarelo) 2px solid;
 }
 
 .texto-pagina-principal h2 {
@@ -38,7 +37,6 @@
   margin-top: 20px;
   flex-wrap: wrap;
   justify-content: center;
-  border: var(--cor-amarelo) 2px solid;
 }
 .produtos-destaque {
   display: flex;

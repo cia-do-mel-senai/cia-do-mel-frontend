@@ -8,13 +8,16 @@ import LoginUsuario from "./Paginas/LoginUsuario/LoginUsuario";
 import CatalogoProdutos from "./Paginas/CatalogoProdutos/CatalogoProdutos";
 import ProdutoDetalhes from "./Paginas/ProdutoDetalhes/ProdutoDetalhes";
 import CadastroProduto from "./Paginas/CadastroProduto/CadastroProduto";
+import { AppProvider } from "./Componentes/AppContext/AppContext";
 
 function Layout() {
   return (
     <div>
-      <Cabecalho />
-      <Outlet />
-      <Rodape />
+      <AppProvider>
+        <Cabecalho />
+        <Outlet />
+        <Rodape />
+      </AppProvider>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./ProdutoDestaque.css";
 import { IoMdSearch } from "react-icons/io";
 

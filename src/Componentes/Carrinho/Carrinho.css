@@ -20,7 +20,7 @@
   top: 0%;
   width: 60%;
   height: 100%;
-  background-color: var(--cor-preto);
+  background-color: rgb(70, 70, 70);
   opacity: 0;
   pointer-events: none;
   transition: ease-in 500ms;

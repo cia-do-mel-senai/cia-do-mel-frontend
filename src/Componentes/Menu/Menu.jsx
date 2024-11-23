@@ -3,10 +3,30 @@ import { useEffect, useState, useRef } from "react";
 import { FaUserCheck, FaUserPlus, FaBars } from "react-icons/fa";
 import { GiBeehive } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
+import { IoLogOutSharp } from "react-icons/io5";
+import { useAppContext } from "../AppContext/AppContext";
 
 const Menu = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const { usuarioLogado, atualizarUsuarioLogado } = useAppContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const logado = JSON.parse(localStorage.getItem("logado"));
+    if (logado) {
+      atualizarUsuarioLogado(true);
+      console.log(usuarioLogado);
+    } else {
+      atualizarUsuarioLogado(false);
+    }
+  }, []);
+
+  const deslogar = () => {
+    atualizarUsuarioLogado(false);
+    setMenuVisible(false);
+    localStorage.removeItem("logado");
+    navigate("/");
+  };
 
   // Cria uma referência para o menu
   const menuRef = useRef(null);
@@ -48,24 +68,35 @@ const Menu = () => {
               <GiBeehive />
               Catalogo
             </li>
-            <li
-              onClick={() => {
-                navigate("cadastro-usuario");
-                setMenuVisible(false);
-              }}
-            >
-              <FaUserPlus />
-              Cadastrar
-            </li>
-            <li
-              onClick={() => {
-                navigate("login-usuario");
-                setMenuVisible(false);
-              }}
-            >
-              <FaUserCheck />
-              Login
-            </li>
+            {!usuarioLogado && (
+              <>
+                <li
+                  onClick={() => {
+                    navigate("cadastro-usuario");
+                    setMenuVisible(false);
+                  }}
+                >
+                  <FaUserPlus />
+                  Cadastrar
+                </li>
+                <li
+                  onClick={() => {
+                    navigate("login-usuario");
+                    setMenuVisible(false);
+                  }}
+                >
+                  <FaUserCheck />
+                  Login
+                </li>
+              </>
+            )}
+
+            {usuarioLogado && (
+              <li onClick={() => deslogar()}>
+                <IoLogOutSharp />
+                Sair
+              </li>
+            )}
           </ul>
         </div>
       </div>

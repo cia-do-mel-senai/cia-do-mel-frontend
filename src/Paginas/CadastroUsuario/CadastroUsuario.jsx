@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./CadastroUsuario.css";
 import { useState } from "react";
 import Modal from "../../Componentes/Modal/Modal";
+import ServicoUsuario from "../../services/ServicoUsuario";
 
 const CadastroUsuario = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const CadastroUsuario = () => {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const servicoUsuario = new ServicoUsuario();
 
   const criarUsuario = () => {
     if (
@@ -41,8 +43,16 @@ const CadastroUsuario = () => {
     if (senha.trim() !== confirmarSenha.trim()) {
       setModalMessage("As senhas não coincidem.");
       setIsModalOpen(true);
-      return false;
+      return;
     }
+
+    const usuario = {
+      nome: nome,
+      email: email,
+      senha: senha,
+    };
+
+    servicoUsuario.cadastrar(usuario, navigate);
   };
 
   return (
@@ -87,7 +97,7 @@ const CadastroUsuario = () => {
       <Modal
         isOpen={isModalOpen}
         message={modalMessage}
-        onClose={() => setIsModalOpen(false)} // Fechar o modal
+        onClose={() => setIsModalOpen(false)}
       />
     </div>
   );
