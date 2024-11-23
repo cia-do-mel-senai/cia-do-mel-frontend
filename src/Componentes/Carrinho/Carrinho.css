@@ -1,29 +1,96 @@
+/* Carrinho.css */
+.carrinho-container {
+  position: relative;
+}
+
 .carrinho-fundo {
   position: fixed;
   left: 0%;
   top: 0%;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.719);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: ease-in 1000ms;
   z-index: 1000;
 }
+
 .carrinho {
   position: fixed;
   right: 0%;
   top: 0%;
   width: 60%;
   height: 100%;
-  background-color: var(--cor-preto);
+  background-color: white;
   opacity: 0;
   pointer-events: none;
   transition: ease-in 500ms;
   transform: translateX(20px);
-  color: black;
   z-index: 1001;
+  overflow-y: scroll;
+  padding: 20px;
 }
+
 .carrinho-animacao {
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
+}
+
+.produtos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.produto {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+}
+
+.produto-imagem {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.produto-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.produto-controle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.produto button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.produto span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.produto p {
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.total {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
