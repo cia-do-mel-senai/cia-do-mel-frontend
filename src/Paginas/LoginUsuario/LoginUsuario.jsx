@@ -11,7 +11,7 @@ const LoginUsuario = () => {
   const [senha, setSenha] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const { usuarioLogado, atualizarUsuarioLogado } = useAppContext();
+  const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
   const servicoUsuario = new ServicoUsuario();
 
   const logarUsuario = () => {
@@ -40,7 +40,7 @@ const LoginUsuario = () => {
       navigate,
       setIsModalOpen,
       setModalMessage,
-      atualizarUsuarioLogado
+      atualizarUsuarioEstaLogado
     );
   };
   return (

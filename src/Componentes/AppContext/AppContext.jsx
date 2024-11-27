@@ -4,14 +4,16 @@ import { createContext, useState, useContext } from "react";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [usuarioLogado, setUsuarioLogado] = useState(false);
+  const [usuarioEstaLogado, setUsuarioEstaLogado] = useState(false);
 
-  const atualizarUsuarioLogado = (usuario) => {
-    setUsuarioLogado(usuario);
+  const atualizarUsuarioEstaLogado = (usuario) => {
+    setUsuarioEstaLogado(usuario);
   };
 
   return (
-    <AppContext.Provider value={{ usuarioLogado, atualizarUsuarioLogado }}>
+    <AppContext.Provider
+      value={{ usuarioEstaLogado, atualizarUsuarioEstaLogado }}
+    >
       {children}
     </AppContext.Provider>
   );

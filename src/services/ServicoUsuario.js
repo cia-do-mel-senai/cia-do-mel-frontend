@@ -41,7 +41,7 @@ class ServicoUsuario {
     atualizarUsuarioLogado
   ) {
     try {
-      const resposta = await fetch("http://localhost:3000/usuarios/logar", {
+      const resposta = await fetch("http://localhost:3000/logar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,12 +55,10 @@ class ServicoUsuario {
       }
 
       const resultado = await resposta.json();
-      console.log(resultado);
       localStorage.setItem("logado", JSON.stringify(resultado.usuario));
       atualizarUsuarioLogado(true);
       navigate("/catalogo-produto");
     } catch (error) {
-      console.log(String(error).replace("Error: ", ""));
       modalMensagem(`${String(error).replace("Error: ", "")}`);
       modalAberto(true);
     }

@@ -5,24 +5,27 @@ import { GiBeehive } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { IoLogOutSharp } from "react-icons/io5";
 import { useAppContext } from "../AppContext/AppContext";
+import { IoBagAddSharp } from "react-icons/io5";
 
 const Menu = () => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const { usuarioLogado, atualizarUsuarioLogado } = useAppContext();
+  const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
+  const [usuarioLogado, setUsuarioLogado] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    const logado = JSON.parse(localStorage.getItem("logado"));
+    const logado = JSON.parse(localStorage.getItem("logado")) || null;
     if (logado) {
-      atualizarUsuarioLogado(true);
-      console.log(usuarioLogado);
+      atualizarUsuarioEstaLogado(true);
+      setUsuarioLogado(JSON.parse(localStorage.getItem("logado")));
     } else {
-      atualizarUsuarioLogado(false);
+      atualizarUsuarioEstaLogado(false);
     }
   }, []);
 
   const deslogar = () => {
-    atualizarUsuarioLogado(false);
+    atualizarUsuarioEstaLogado(false);
+    setUsuarioLogado({});
     setMenuVisible(false);
     localStorage.removeItem("logado");
     navigate("/");
@@ -68,7 +71,7 @@ const Menu = () => {
               <GiBeehive />
               Catalogo
             </li>
-            {!usuarioLogado && (
+            {!usuarioEstaLogado && (
               <>
                 <li
                   onClick={() => {
@@ -76,7 +79,7 @@ const Menu = () => {
                     setMenuVisible(false);
                   }}
                 >
-                  <FaUserPlus />
+                  <FaUserPlus size={20} />
                   Cadastrar
                 </li>
                 <li
@@ -85,16 +88,23 @@ const Menu = () => {
                     setMenuVisible(false);
                   }}
                 >
-                  <FaUserCheck />
+                  <FaUserCheck size={20} />
                   Login
                 </li>
               </>
             )}
 
-            {usuarioLogado && (
+            {usuarioEstaLogado && (
               <li onClick={() => deslogar()}>
-                <IoLogOutSharp />
+                <IoLogOutSharp size={20} />
                 Sair
+              </li>
+            )}
+
+            {usuarioEstaLogado && usuarioLogado.funcao === "admin" && (
+              <li>
+                <IoBagAddSharp size={20} />
+                Cadastrar
               </li>
             )}
           </ul>
