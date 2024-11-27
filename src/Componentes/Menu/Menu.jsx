@@ -10,22 +10,24 @@ import { IoBagAddSharp } from "react-icons/io5";
 const Menu = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
-  const [usuarioLogado, setUsuarioLogado] = useState({});
+  const [usuarioAdmin, setUsuarioAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const logado = JSON.parse(localStorage.getItem("logado")) || null;
     if (logado) {
       atualizarUsuarioEstaLogado(true);
-      setUsuarioLogado(JSON.parse(localStorage.getItem("logado")));
+      if (logado.funcao === "admin") {
+        setUsuarioAdmin(true);
+      }
     } else {
       atualizarUsuarioEstaLogado(false);
     }
-  }, []);
+  }, [usuarioEstaLogado]);
 
   const deslogar = () => {
     atualizarUsuarioEstaLogado(false);
-    setUsuarioLogado({});
+    setUsuarioAdmin(false);
     setMenuVisible(false);
     localStorage.removeItem("logado");
     navigate("/");
@@ -101,7 +103,7 @@ const Menu = () => {
               </li>
             )}
 
-            {usuarioEstaLogado && usuarioLogado.funcao === "admin" && (
+            {usuarioEstaLogado && usuarioAdmin && (
               <li>
                 <IoBagAddSharp size={20} />
                 Cadastrar
