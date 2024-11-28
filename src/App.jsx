@@ -9,6 +9,7 @@ import CatalogoProdutos from "./Paginas/CatalogoProdutos/CatalogoProdutos";
 import ProdutoDetalhes from "./Paginas/ProdutoDetalhes/ProdutoDetalhes";
 import CadastroProduto from "./Paginas/CadastroProduto/CadastroProduto";
 import { AppProvider } from "./Componentes/AppContext/AppContext";
+import VerificadorAdmin from "./Componentes/VerificadorAdmin/VerificadorAdmin";
 
 function Layout() {
   return (
@@ -48,9 +49,14 @@ function App() {
           path: "produto-detalhes",
           element: <ProdutoDetalhes />,
         },
+
         {
           path: "cadastro-produto",
-          element: <CadastroProduto />,
+          element: (
+            <VerificadorAdmin>
+              <CadastroProduto />
+            </VerificadorAdmin>
+          ),
         },
       ],
     },

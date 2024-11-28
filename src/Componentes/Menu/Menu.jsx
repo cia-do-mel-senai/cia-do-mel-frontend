@@ -104,7 +104,7 @@ const Menu = () => {
             )}
 
             {usuarioEstaLogado && usuarioAdmin && (
-              <li>
+              <li onClick={() => navigate("/cadastro-produto")}>
                 <IoBagAddSharp size={20} />
                 Cadastrar
               </li>

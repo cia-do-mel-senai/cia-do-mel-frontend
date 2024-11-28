@@ -1,3 +1,5 @@
+import instanciaApi from "./Api";
+
 class ServicoUsuario {
   async listar() {
     try {
@@ -17,21 +19,13 @@ class ServicoUsuario {
   }
   async cadastrar(usuario, navigate) {
     try {
-      const resposta = await fetch("http://localhost:3000/usuarios", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(usuario),
-      });
+      const response = await instanciaApi.post("/usuarios", usuario);
 
-      if (!resposta.ok) {
-        throw new Error(`Erro: ${resposta.status} - ${resposta.statusText}`);
+      if (response.status !== 200) {
+        throw new Error(response.data.mensagem || "Erro desconhecido");
       }
       navigate("/login-usuario");
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   }
   async logar(
     usuario,
@@ -41,21 +35,13 @@ class ServicoUsuario {
     atualizarUsuarioLogado
   ) {
     try {
-      const resposta = await fetch("http://localhost:3000/logar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(usuario),
-      });
+      const response = await instanciaApi.post("/logar", usuario);
 
-      if (!resposta.ok) {
-        const erro = await resposta.json();
-        throw new Error(erro.mensagem || "Erro desconhecido");
+      if (response.status !== 200) {
+        throw new Error(response.data.mensagem || "Erro desconhecido");
       }
 
-      const resultado = await resposta.json();
-      localStorage.setItem("logado", JSON.stringify(resultado.usuario));
+      localStorage.setItem("logado", JSON.stringify(response.data.usuario));
       atualizarUsuarioLogado(true);
       navigate("/catalogo-produto");
     } catch (error) {
