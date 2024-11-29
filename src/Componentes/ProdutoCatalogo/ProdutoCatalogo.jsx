@@ -1,6 +1,8 @@
 import "./ProdutoCatalogo.css";
+import { useNavigate } from "react-router-dom";
 
-const ProdutoCatalogo = ({ imagem, nome, preco }) => {
+const ProdutoCatalogo = ({ imagem, nome, preco, idProduto }) => {
+  const navigate = useNavigate();
   return (
     <div className="produto-catalogo-container">
       <img src={imagem} />
@@ -10,7 +12,9 @@ const ProdutoCatalogo = ({ imagem, nome, preco }) => {
           R${preco}
         </b>
       </p>
-      <button>Comprar</button>
+      <button onClick={() => navigate(`/produto-detalhes:${idProduto}`)}>
+        Comprar
+      </button>
     </div>
   );
 };

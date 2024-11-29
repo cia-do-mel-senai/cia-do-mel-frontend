@@ -1,7 +1,28 @@
 import ProdutoCatalogo from "../../Componentes/ProdutoCatalogo/ProdutoCatalogo";
 import "./CatalogoProdutos.css";
+import ServicoProduto from "../../services/ServicoProduto";
+import { useEffect, useState } from "react";
 
 const CatalogoProdutos = () => {
+  const servicoProduto = new ServicoProduto();
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    const pegarProdutos = async () => {
+      try {
+        const produtosData = await servicoProduto.listar();
+        setProdutos(produtosData);
+      } catch (error) {
+        console.error("Erro ao buscar os produtos", error);
+      }
+    };
+    pegarProdutos();
+  }, []);
+
+  useEffect(() => {
+    console.log(produtos);
+  }, [produtos]);
+
   return (
     <div className="catalogo-container">
       <div className="produtos-container">
@@ -16,41 +37,17 @@ const CatalogoProdutos = () => {
           </select>
         </div>
         <div className="produtos-catalogo-container">
-          <ProdutoCatalogo
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de mel"}
-            preco={29.99}
-          />
-          <ProdutoCatalogo
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de mel"}
-            preco={29.99}
-          />
-          <ProdutoCatalogo
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de mel"}
-            preco={29.99}
-          />
-          <ProdutoCatalogo
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de mel"}
-            preco={29.99}
-          />
-          <ProdutoCatalogo
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de mel"}
-            preco={29.99}
-          />
+          {produtos.map((produto, index) => {
+            return (
+              <ProdutoCatalogo
+                imagem={produto.imagem_produto}
+                nome={produto.nome_produto}
+                preco={produto.preco_produto}
+                key={index}
+                idProduto={produto.id_produto}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

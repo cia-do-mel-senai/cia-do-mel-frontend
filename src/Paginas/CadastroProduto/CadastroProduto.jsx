@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./CadastroProduto.css";
 import Modal from "../../Componentes/Modal/Modal";
 import ServicoProduto from "../../services/ServicoProduto";
@@ -11,6 +11,7 @@ const CadastroProduto = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const servicoProduto = new ServicoProduto();
+  const inputImagemRef = useRef(null);
 
   const mudarImagem = (event) => {
     const arquivo = event.target.files[0];
@@ -39,7 +40,15 @@ const CadastroProduto = () => {
       imagem: imagem,
     };
 
+    console.log(produto);
+
     servicoProduto.cadastrar(produto, setIsModalOpen, setModalMessage);
+
+    setNome("");
+    setPreco(0);
+    setDescricao("");
+    setImagem("");
+    inputImagemRef.current.value = "";
   };
 
   return (
@@ -52,6 +61,7 @@ const CadastroProduto = () => {
           id="nome-cadastro-produto"
           placeholder="Digite o nome do produto."
           onChange={(e) => setNome(e.target.value)}
+          value={nome}
         />
         <label htmlFor="descricao-cadastro-produto">Descricao:</label>
         <input
@@ -59,6 +69,7 @@ const CadastroProduto = () => {
           id="descricao-cadastro-produto"
           placeholder="Digite a descrição do produto."
           onChange={(e) => setDescricao(e.target.value)}
+          value={descricao}
         />
         <label htmlFor="preco-cadastro-produto">Preço:</label>
         <input
@@ -67,9 +78,11 @@ const CadastroProduto = () => {
           placeholder="Digite o preço do produto."
           min={0.01}
           onChange={(e) => setPreco(e.target.value)}
+          value={preco}
         />
         <label htmlFor="imagem-cadastro-produto">Imagem:</label>
         <input
+          ref={inputImagemRef}
           type="file"
           accept="image/*"
           id="confrimar-senha-cadastro"
