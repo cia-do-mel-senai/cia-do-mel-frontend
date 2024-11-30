@@ -23,7 +23,7 @@ const Menu = () => {
     } else {
       atualizarUsuarioEstaLogado(false);
     }
-  }, [usuarioEstaLogado]);
+  }, [usuarioEstaLogado, atualizarUsuarioEstaLogado]);
 
   const deslogar = () => {
     atualizarUsuarioEstaLogado(false);
@@ -104,7 +104,12 @@ const Menu = () => {
             )}
 
             {usuarioEstaLogado && usuarioAdmin && (
-              <li onClick={() => navigate("/cadastro-produto")}>
+              <li
+                onClick={() => {
+                  navigate("/cadastro-produto");
+                  setMenuVisible(false);
+                }}
+              >
                 <IoBagAddSharp size={20} />
                 Cadastrar
               </li>

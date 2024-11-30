@@ -1,4 +1,4 @@
-.cadastro-usuario-container {
+.cadastro-produto-container {
   height: 80vh;
   background-color: var(--cor-fundo);
   display: flex;
@@ -8,7 +8,7 @@
   gap: 20px;
   overflow: auto;
 }
-.cadastro-usuario-inputs {
+.cadastro-produto-inputs {
   width: 80%;
   height: fit-content;
   background-color: var(--cor-preto);
@@ -19,22 +19,29 @@
   align-items: center;
   flex-direction: column;
 }
-.cadastro-usuario-inputs input {
+.cadastro-produto-inputs input {
   width: 80%;
   padding: 10px;
   border-radius: 30px;
   border: none;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
-.cadastro-usuario-inputs label {
+.cadastro-produto-inputs label {
   width: 80%;
   text-align: left;
 }
-.cadastro-usuario-inputs button {
+.cadastro-produto-inputs button {
   width: 40%;
   background-color: var(--cor-amarelo);
   border-radius: 30px;
   border: none;
   padding: 5px;
   margin-bottom: 20px;
+}
+.cadastro-produto-inputs img{
+  width: 50%;
+  height: auto;
+  margin-top: 0px;
+  margin: 15px;
+  border-radius: 20px;
 }

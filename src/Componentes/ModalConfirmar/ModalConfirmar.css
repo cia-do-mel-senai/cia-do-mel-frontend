@@ -1,0 +1,63 @@
+.modal-exclusao-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-exclusao-content {
+    background-color: rgb(70, 70, 70);
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal-exclusao-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--cor-amarelo);
+    text-align: center;
+  }
+  
+  .modal-exclusao-body p {
+    font-size: 1rem;
+    color: var(--cor-amarelo);
+    text-align: center;
+  }
+  
+  .modal-exclusao-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  .modal-exclusao-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+  
+  .modal-exclusao-close-btn,
+  .modal-exclusao-confirm-btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .modal-exclusao-close-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .modal-exclusao-confirm-btn {
+    background-color: #4caf50;
+    color: white;
+  }
+    

@@ -1,8 +1,7 @@
-import React from "react";
-import "./Modal.css"; // Importando o arquivo de estilo
+import "./Modal.css";
 
 const Modal = ({ isOpen, message, onClose }) => {
-  if (!isOpen) return null; // Não renderiza o modal se não estiver aberto
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>

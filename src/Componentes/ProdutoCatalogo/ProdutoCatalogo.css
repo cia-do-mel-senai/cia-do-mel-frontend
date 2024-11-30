@@ -4,7 +4,7 @@
   border-radius: 20px;
   padding: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   max-height: 200px;
   flex-direction: column;
   align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .produto-catalogo-container img {
-  max-width: 70%;
+  width: 100%;
   height: auto;
   border-radius: 20px;
 }

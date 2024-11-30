@@ -52,8 +52,8 @@ const CadastroProduto = () => {
   };
 
   return (
-    <div className="cadastro-usuario-container">
-      <div className="cadastro-usuario-inputs">
+    <div className="cadastro-produto-container">
+      <div className="cadastro-produto-inputs">
         <h2>Cadastro</h2>
         <label htmlFor="nome-cadastro-produto">Nome:</label>
         <input

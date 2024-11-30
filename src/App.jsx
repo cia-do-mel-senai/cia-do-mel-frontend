@@ -46,7 +46,7 @@ function App() {
           element: <CatalogoProdutos />,
         },
         {
-          path: "produto-detalhes",
+          path: "produto-detalhes/:id",
           element: <ProdutoDetalhes />,
         },
 

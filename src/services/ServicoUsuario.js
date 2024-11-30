@@ -25,7 +25,10 @@ class ServicoUsuario {
         throw new Error(response.data.mensagem || "Erro desconhecido");
       }
       navigate("/login-usuario");
-    } catch (error) {}
+    } catch (error) {
+      console.error("Erro ao listar os produtos:", error);
+      throw error;
+    }
   }
   async logar(
     usuario,

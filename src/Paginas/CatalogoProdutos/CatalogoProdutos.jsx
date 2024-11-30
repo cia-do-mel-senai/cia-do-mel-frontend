@@ -17,11 +17,25 @@ const CatalogoProdutos = () => {
       }
     };
     pegarProdutos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     console.log(produtos);
   }, [produtos]);
+
+  const filtrar = (filtro) => {
+    switch (true) {
+      case filtro === "crescente:":
+        break;
+      case filtro === "descrescente:":
+        break;
+      case filtro === "a-z:":
+        break;
+      case filtro === "z-a:":
+        break;
+    }
+  };
 
   return (
     <div className="catalogo-container">
@@ -29,11 +43,15 @@ const CatalogoProdutos = () => {
         <h2>Catalogo</h2>
         <div className="filtragem">
           <label htmlFor="filtragem-catalogo">Filtrar por</label>
-          <select name="filtragem-catalogo" id="filtragem-catalogo">
-            <option value="">Preço crescente</option>
-            <option value="">Preço decrescente</option>
-            <option value="">Ordenar de A a Z</option>
-            <option value="">Ordenar de Z a A</option>
+          <select
+            name="filtragem-catalogo"
+            id="filtragem-catalogo"
+            onChange={(e) => filtrar(e.target.value)}
+          >
+            <option value="crescente">Preço crescente</option>
+            <option value="descrescente">Preço decrescente</option>
+            <option value="a-z">Ordenar de A a Z</option>
+            <option value="z-a">Ordenar de Z a A</option>
           </select>
         </div>
         <div className="produtos-catalogo-container">

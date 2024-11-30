@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./ProdutoCatalogo.css";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +13,7 @@ const ProdutoCatalogo = ({ imagem, nome, preco, idProduto }) => {
           R${preco}
         </b>
       </p>
-      <button onClick={() => navigate(`/produto-detalhes:${idProduto}`)}>
+      <button onClick={() => navigate(`/produto-detalhes/${idProduto}`)}>
         Comprar
       </button>
     </div>
