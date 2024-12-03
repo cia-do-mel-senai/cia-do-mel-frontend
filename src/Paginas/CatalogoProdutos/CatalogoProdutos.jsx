@@ -2,10 +2,13 @@ import ProdutoCatalogo from "../../Componentes/ProdutoCatalogo/ProdutoCatalogo";
 import "./CatalogoProdutos.css";
 import ServicoProduto from "../../services/ServicoProduto";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const CatalogoProdutos = () => {
   const servicoProduto = new ServicoProduto();
   const [produtos, setProdutos] = useState([]);
+  const [filtro, setFiltro] = useState("");
+  const location = useLocation();
 
   useEffect(() => {
     const pegarProdutos = async () => {
@@ -17,24 +20,54 @@ const CatalogoProdutos = () => {
       }
     };
     pegarProdutos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log(produtos);
-  }, [produtos]);
-
   const filtrar = (filtro) => {
+    let produtosFiltrados = [...produtos];
     switch (true) {
-      case filtro === "crescente:":
+      case filtro === "crescente":
+        produtosFiltrados = produtosFiltrados.sort(
+          (a, b) => a.preco_produto - b.preco_produto
+        );
         break;
-      case filtro === "descrescente:":
+      case filtro === "descrescente":
+        produtosFiltrados = produtosFiltrados.sort(
+          (a, b) => b.preco_produto - a.preco_produto
+        );
         break;
-      case filtro === "a-z:":
+      case filtro === "a-z":
+        produtosFiltrados = produtosFiltrados.sort((a, b) =>
+          a.nome_produto.localeCompare(b.nome_produto)
+        );
         break;
-      case filtro === "z-a:":
+      case filtro === "z-a":
+        produtosFiltrados = produtosFiltrados
+          .sort((a, b) => a.nome_produto.localeCompare(b.nome_produto))
+          .reverse();
         break;
     }
+    const params = new URLSearchParams(location.search);
+    const pesquisa = params.get("busca");
+    if (pesquisa !== null) {
+      produtosFiltrados = produtosFiltrados.filter((produto) =>
+        produto.nome_produto.toLowerCase().includes(pesquisa.toLowerCase())
+      );
+    }
+
+    if (produtosFiltrados.length < 1) {
+      return <p>Produto não encontrado.</p>;
+    }
+    return produtosFiltrados.map((produto, index) => {
+      return (
+        <ProdutoCatalogo
+          imagem={produto.imagem_produto}
+          nome={produto.nome_produto}
+          preco={produto.preco_produto}
+          key={index}
+          idProduto={produto.id_produto}
+        />
+      );
+    });
   };
 
   return (
@@ -46,7 +79,7 @@ const CatalogoProdutos = () => {
           <select
             name="filtragem-catalogo"
             id="filtragem-catalogo"
-            onChange={(e) => filtrar(e.target.value)}
+            onChange={(e) => setFiltro(e.target.value)}
           >
             <option value="crescente">Preço crescente</option>
             <option value="descrescente">Preço decrescente</option>
@@ -54,19 +87,7 @@ const CatalogoProdutos = () => {
             <option value="z-a">Ordenar de Z a A</option>
           </select>
         </div>
-        <div className="produtos-catalogo-container">
-          {produtos.map((produto, index) => {
-            return (
-              <ProdutoCatalogo
-                imagem={produto.imagem_produto}
-                nome={produto.nome_produto}
-                preco={produto.preco_produto}
-                key={index}
-                idProduto={produto.id_produto}
-              />
-            );
-          })}
-        </div>
+        <div className="produtos-catalogo-container">{filtrar(filtro)}</div>
       </div>
     </div>
   );

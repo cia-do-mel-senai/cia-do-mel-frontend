@@ -1,37 +1,51 @@
 import { useNavigate } from "react-router-dom";
 import ProdutoDestaque from "../../Componentes/ProdutoDestaque/ProdutoDestaque";
 import "./Principal.css";
+import { useEffect, useState } from "react";
+import ServicoProduto from "../../services/ServicoProduto";
 
 const Principal = () => {
   const navigate = useNavigate();
+  const servicoProduto = new ServicoProduto();
+
+  const [produtos, setProdutos] = useState([]);
+  const [produtosSelecionados, setProdutosSelecionados] = useState([]);
+
+  useEffect(() => {
+    const pegarProdutos = async () => {
+      try {
+        const produtosData = await servicoProduto.listar();
+        setProdutos(produtosData);
+      } catch (error) {
+        console.error("Erro ao buscar os produtos", error);
+      }
+    };
+    pegarProdutos();
+  }, []);
+
+  useEffect(() => {
+    let produtosAleatorios = [...produtos];
+
+    produtosAleatorios = produtosAleatorios.sort(() => Math.random() - 0.5);
+
+    setProdutosSelecionados(produtosAleatorios.slice(0, 4));
+    console.log(produtosSelecionados);
+  }, [produtos]);
+
   return (
     <div className="principal-container">
       <div className="produtos-destaque-principal">
         <div className="produtos-destaque">
-          <ProdutoDestaque
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de Mel"}
-          />
-          <ProdutoDestaque
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de Mel"}
-          />
-          <ProdutoDestaque
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de Mel"}
-          />
-          <ProdutoDestaque
-            imagem={
-              "https://www.lojaapicola.com.br/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/m/e/mel_pote_1kg_frente.jpg"
-            }
-            nome={"Pote de Mel"}
-          />
+          {produtosSelecionados.map((produto, index) => {
+            return (
+              <ProdutoDestaque
+                key={index}
+                imagem={produto.imagem_produto}
+                nome={produto.nome_produto}
+                id={produto.id_produto}
+              />
+            );
+          })}
         </div>
         <button
           style={{
@@ -50,8 +64,8 @@ const Principal = () => {
         </button>
       </div>
       <div className="texto-pagina-principal">
+        <h2>Cia do Mel</h2>
         <p>
-          <h2>Cia do Mel</h2>
           Bem-vindo à Cia do Mel!
           <br />
           <br />

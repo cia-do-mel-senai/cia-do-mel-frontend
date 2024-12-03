@@ -1,22 +1,23 @@
 .produto-catalogo-container {
-  width: 35%;
+  width: 40%; /* Responsivo, usa 90% da largura disponível */
+  max-width: 300px; /* Limite máximo de largura */
+  height: auto; /* Altura automática para se ajustar ao conteúdo */
   background-color: black;
   border-radius: 20px;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
-  max-height: 200px;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   border: var(--cor-amarelo) 3px solid;
-  margin-top: 10px;
-  margin: 5px;
+  margin: 10px auto; /* Centraliza e dá margem no topo e fundo */
 }
 
 .produto-catalogo-container img {
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
+  width: 100%; /* A imagem ocupa toda a largura do card */
+  height: 150px; /* Tamanho fixo para a altura das imagens */
+  object-fit: cover; /* A imagem será cortada para cobrir o espaço sem distorcer */
+  border-radius: 15px;
 }
 
 .produto-catalogo-container p {
