@@ -14,8 +14,9 @@
 }
 
 .produto-destaque-container img {
-  max-width: 70%;
-  height: auto;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
   border-radius: 20px;
 }
 

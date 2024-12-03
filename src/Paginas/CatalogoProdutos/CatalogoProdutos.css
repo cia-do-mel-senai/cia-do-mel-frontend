@@ -15,9 +15,12 @@
   flex-direction: column;
   color: var(--cor-amarelo);
 }
+.produtos-container h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
 .filtragem {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 5px;
 }

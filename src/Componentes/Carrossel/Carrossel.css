@@ -1,0 +1,46 @@
+.carrossel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin: 20px;
+  }
+  
+  .carrossel-container {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .teste,.teste2 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 30px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .teste:hover, .teste2:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .teste {
+    left: 0;
+  }
+  
+  .teste2 {
+    right: 0;
+  } 
+
+  

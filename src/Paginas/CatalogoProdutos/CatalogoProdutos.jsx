@@ -75,7 +75,7 @@ const CatalogoProdutos = () => {
       <div className="produtos-container">
         <h2>Catalogo</h2>
         <div className="filtragem">
-          <label htmlFor="filtragem-catalogo">Filtrar por</label>
+          <label htmlFor="filtragem-catalogo">Filtro:</label>
           <select
             name="filtragem-catalogo"
             id="filtragem-catalogo"

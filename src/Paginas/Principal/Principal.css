@@ -29,9 +29,8 @@
 
 .produtos-destaque-principal {
   display: flex;
-  width: 70%;
+  width: 100%;
   padding: 20px;
-  background-color: var(--cor-preto);
   height: fit-content;
   color: var(--cor-amarelo);
   border-radius: 40px;

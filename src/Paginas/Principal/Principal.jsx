@@ -3,6 +3,7 @@ import ProdutoDestaque from "../../Componentes/ProdutoDestaque/ProdutoDestaque";
 import "./Principal.css";
 import { useEffect, useState } from "react";
 import ServicoProduto from "../../services/ServicoProduto";
+import Carrossel from "../../Componentes/Carrossel/Carrossel";
 
 const Principal = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Principal = () => {
 
   return (
     <div className="principal-container">
+      {/* <Carrossel></Carrossel> */}
       <div className="produtos-destaque-principal">
         <div className="produtos-destaque">
           {produtosSelecionados.map((produto, index) => {
@@ -64,7 +66,7 @@ const Principal = () => {
         </button>
       </div>
       <div className="texto-pagina-principal">
-        <h2>Cia do Mel</h2>
+        <h2 style={{ color: "white" }}>Cia do Mel</h2>
         <p>
           Bem-vindo à Cia do Mel!
           <br />

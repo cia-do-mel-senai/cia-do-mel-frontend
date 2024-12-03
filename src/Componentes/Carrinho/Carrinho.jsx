@@ -5,22 +5,7 @@ import ProdutoCarrinho from "../ProdutoCarrinho/ProdutoCarrinho";
 
 const Carrinho = () => {
   const [carrinhoVisible, setCarrinhoVisible] = useState(false);
-  const [produtos, setProdutos] = useState([
-    {
-      id: 1,
-      nome: "Produto 1",
-      preco: 29.99,
-      imagem: "/imagens/produto1.jpg",
-      quantidade: 1,
-    },
-    {
-      id: 2,
-      nome: "Produto 2",
-      preco: 49.99,
-      imagem: "/imagens/produto2.jpg",
-      quantidade: 1,
-    },
-  ]);
+  const [produtos, setProdutos] = useState([]);
 
   // Função para adicionar produto
   const adicionarProduto = (produto) => {

@@ -12,23 +12,23 @@ const Rodape = () => {
       <div className="rodape-contato">
         <h3 style={{ fontSize: "0.8rem" }}>Contato</h3>
         <div>
-          <MdLocalPhone size={10} color="grey" />
+          <MdLocalPhone size={10} />
           <p>(48) 9999-9999</p>
         </div>
         <div>
-          <MdWhatsapp size={10} color="rgb(30, 255, 30)" />
+          <MdWhatsapp size={10} />
           <p>(48) 9999-9999</p>
         </div>
         <div>
-          <MdEmail size={10} color="#50b3ff" />
+          <MdEmail size={10} />
           <p>ciadomelsenai@gmail.com</p>
         </div>
       </div>
       <div className="rodape-fundo">
         <div>
-          <MdFacebook size={10} color="#678dff" />
-          <FaYoutube size={10} color="red" />
-          <FaInstagram size={10} color="#ff67d6" />
+          <MdFacebook size={10} />
+          <FaYoutube size={10} />
+          <FaInstagram size={10} />
         </div>
         <p>
           Copyright©{new Date().getFullYear()}-Todos os direitos reservados-Cia

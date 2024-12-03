@@ -6,6 +6,7 @@ import ServicoProduto from "../../services/ServicoProduto";
 import { useAppContext } from "../../Componentes/AppContext/AppContext";
 import Modal from "../../Componentes/Modal/Modal";
 import ModalConfirmar from "../../Componentes/ModalConfirmar/ModalConfirmar";
+import { IoIosArrowBack } from "react-icons/io";
 
 const ProdutoDetalhes = () => {
   const navigate = useNavigate();
@@ -86,9 +87,46 @@ const ProdutoDetalhes = () => {
     );
   };
 
+  const adicionarProdutoCarrinho = () => {
+    let produtosNoCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+    if (!produtosNoCarrinho) {
+      produtosNoCarrinho = [];
+      produtosNoCarrinho.push({
+        id: produto.id_produto,
+        quantidade: quantidade,
+      });
+      localStorage.setItem("carrinho", JSON.stringify(produtosNoCarrinho));
+      console.log(produtosNoCarrinho);
+      setModalMessage("Produto adicionado no carrinho.");
+      setIsModalOpen(true);
+      return;
+    }
+    let produtoJaNoCarrinho = false;
+    produtosNoCarrinho.map((produtoCarrinho) => {
+      if (produtoCarrinho.id === produto) {
+        produtoCarrinho.quantidade += quantidade;
+        produtoJaNoCarrinho = true;
+      }
+    });
+    if (!produtoJaNoCarrinho) {
+      produtosNoCarrinho.push({
+        id: produto.id_produto,
+        quantidade: quantidade,
+      });
+    }
+    localStorage.setItem("carrinho");
+    setModalMessage("Produto adicionado no carrinho.");
+    setIsModalOpen(true);
+  };
+
   if (usuarioEstaLogado && usuarioAdmin) {
     return (
       <div className="produto-detalhes-container">
+        <IoIosArrowBack
+          className="detalhes-voltar"
+          size={40}
+          onClick={() => navigate("/catalogo-produto")}
+        />
         <div className="editar-produto-detalhes">
           <img src={produto.imagem_produto} alt="" />
           <input
@@ -128,15 +166,18 @@ const ProdutoDetalhes = () => {
 
           <label htmlFor="preco-produto-input">Preço:</label>
           <input
-            type="number"
+            type="text"
             className="preco-produto-input"
             value={produto.preco_produto}
-            onChange={(e) =>
-              setProduto({
-                ...produto,
-                preco_produto: parseFloat(e.target.value),
-              })
-            }
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^\d*\.?\d*$/.test(value)) {
+                setProduto({
+                  ...produto,
+                  preco_produto: value,
+                });
+              }
+            }}
           />
 
           <div className="acoes-produto">
@@ -173,6 +214,11 @@ const ProdutoDetalhes = () => {
   } else {
     return (
       <div className="produto-detalhes-container">
+        <IoIosArrowBack
+          className="detalhes-voltar"
+          size={40}
+          onClick={() => navigate("/catalogo-produto")}
+        />
         <div className="produto-detalhes">
           <img src={produto.imagem_produto} alt="" />
           <p>{produto.nome_produto}</p>
@@ -206,12 +252,20 @@ const ProdutoDetalhes = () => {
             >
               +
             </button>
-            <button className="botao-adicionar-produto-detalhes">
+            <button
+              className="botao-adicionar-produto-detalhes"
+              onClick={adicionarProdutoCarrinho}
+            >
               Adicionar
               <MdOutlineShoppingCart />
             </button>
           </div>
         </div>
+        <Modal
+          isOpen={isModalOpen}
+          message={modalMessage}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     );
   }
