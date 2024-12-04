@@ -5,7 +5,7 @@ import "./Cabecalho.css";
 import logo from "./logo.svg";
 import { IoMdSearch } from "react-icons/io";
 import Carrinho from "../Carrinho/Carrinho";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Cabecalho = () => {
   const navigate = useNavigate();

@@ -10,12 +10,11 @@ const Principal = () => {
   const servicoProduto = new ServicoProduto();
 
   const [produtos, setProdutos] = useState([]);
-  const [produtosSelecionados, setProdutosSelecionados] = useState([]);
 
   useEffect(() => {
     const pegarProdutos = async () => {
       try {
-        const produtosData = await servicoProduto.listar();
+        const produtosData = await servicoProduto.pegarUltimosProdutos();
         setProdutos(produtosData);
       } catch (error) {
         console.error("Erro ao buscar os produtos", error);
@@ -24,21 +23,12 @@ const Principal = () => {
     pegarProdutos();
   }, []);
 
-  useEffect(() => {
-    let produtosAleatorios = [...produtos];
-
-    produtosAleatorios = produtosAleatorios.sort(() => Math.random() - 0.5);
-
-    setProdutosSelecionados(produtosAleatorios.slice(0, 4));
-    console.log(produtosSelecionados);
-  }, [produtos]);
-
   return (
     <div className="principal-container">
       {/* <Carrossel></Carrossel> */}
       <div className="produtos-destaque-principal">
         <div className="produtos-destaque">
-          {produtosSelecionados.map((produto, index) => {
+          {produtos.map((produto, index) => {
             return (
               <ProdutoDestaque
                 key={index}

@@ -54,6 +54,15 @@ class ServicoProduto {
       throw error;
     }
   }
+  async pegarUltimosProdutos() {
+    try {
+      const response = await instanciaApi.get("/ultimos-produtos");
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao listar os produtos:", error);
+      throw error;
+    }
+  }
 }
 
 export default ServicoProduto;

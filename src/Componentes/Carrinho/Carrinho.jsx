@@ -4,12 +4,28 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import ProdutoCarrinho from "../ProdutoCarrinho/ProdutoCarrinho";
 import ServicoProduto from "../../services/ServicoProduto";
 import { CarrinhoContext } from "../CarrinhoContext/CarrinhoContext";
+import { GrUserAdmin } from "react-icons/gr";
+import { useAppContext } from "../AppContext/AppContext";
 
 const Carrinho = () => {
   const [carrinhoVisible, setCarrinhoVisible] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const { produtosNoCarrinho, atualizarCarrinho } = useContext(CarrinhoContext);
   const servicoProduto = new ServicoProduto();
+  const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
+  const [usuarioAdmin, setUsuarioAdmin] = useState(false);
+
+  useEffect(() => {
+    const logado = JSON.parse(localStorage.getItem("logado")) || null;
+    if (logado) {
+      atualizarUsuarioEstaLogado(true);
+      if (logado.funcao === "admin") {
+        setUsuarioAdmin(true);
+      }
+    } else {
+      atualizarUsuarioEstaLogado(false);
+    }
+  }, [usuarioEstaLogado, atualizarUsuarioEstaLogado]);
 
   useEffect(() => {
     // Carregar os produtos da API
@@ -86,15 +102,12 @@ const Carrinho = () => {
   };
 
   const removerProduto = (produto) => {
-    const updatedCarrinho = produtosNoCarrinho
-      .map((item) =>
-        item.id === produto.id_produto
-          ? { ...item, quantidade: item.quantidade - 1 }
-          : item
-      )
-      .filter((item) => item.quantidade > 0); // Remove os produtos com quantidade 0
+    const updatedCarrinho = produtosNoCarrinho.filter(
+      (item) => item.id !== produto.id_produto
+    );
 
     atualizarCarrinho(updatedCarrinho);
+
     localStorage.setItem("carrinho", JSON.stringify(updatedCarrinho));
   };
 
@@ -125,10 +138,15 @@ const Carrinho = () => {
 
   return (
     <div className="carrinho-container">
-      <MdOutlineShoppingCart
-        size={30}
-        onClick={() => setCarrinhoVisible(!carrinhoVisible)}
-      />
+      {usuarioAdmin && usuarioEstaLogado ? (
+        <GrUserAdmin size={30} />
+      ) : (
+        <MdOutlineShoppingCart
+          size={30}
+          onClick={() => setCarrinhoVisible(!carrinhoVisible)}
+        />
+      )}
+
       <div
         className={`${carrinhoVisible ? "carrinho-fundo" : ""}`}
         onClick={(e) => {
