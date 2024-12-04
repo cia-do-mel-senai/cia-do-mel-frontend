@@ -26,8 +26,11 @@
   transition: ease-in 500ms;
   transform: translateX(20px);
   z-index: 1001;
-  overflow-y: scroll;
+  overflow-y: auto; /* Para evitar transbordo dos produtos */
   padding: 20px;
+  display: flex;
+  flex-direction: column; /* Organizar elementos em coluna */
+  justify-content: space-between; /* Deixar o footer fixo no final */
 }
 
 .carrinho-animacao {
@@ -40,6 +43,8 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  flex: 1; /* Permitir que a lista de produtos ocupe o espaço disponível */
+  overflow-y: auto; /* Permitir scroll caso necessário */
 }
 
 .produto {
@@ -94,4 +99,23 @@ h2 {
   margin-top: 20px;
   font-size: 1.2rem;
   font-weight: bold;
+}
+.carrinho-footer {
+  position: sticky; /* Mantém o footer fixo no final da visualização */
+  bottom: 0;
+  background-color: rgb(70, 70, 70);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.finalizar-compra {
+  background-color: var(--cor-amarelo);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 20px;
 }

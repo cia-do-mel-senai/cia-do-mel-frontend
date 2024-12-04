@@ -6,6 +6,7 @@ import ServicoProduto from "../../services/ServicoProduto";
 import { CarrinhoContext } from "../CarrinhoContext/CarrinhoContext";
 import { GrUserAdmin } from "react-icons/gr";
 import { useAppContext } from "../AppContext/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Carrinho = () => {
   const [carrinhoVisible, setCarrinhoVisible] = useState(false);
@@ -14,6 +15,7 @@ const Carrinho = () => {
   const servicoProduto = new ServicoProduto();
   const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
   const [usuarioAdmin, setUsuarioAdmin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const logado = JSON.parse(localStorage.getItem("logado")) || null;
@@ -136,6 +138,13 @@ const Carrinho = () => {
     return valorTotal.toFixed(2);
   };
 
+  const finalizarCompra = () => {
+    if (!usuarioEstaLogado) {
+      setCarrinhoVisible(false);
+      navigate("/login-usuario");
+    }
+  };
+
   return (
     <div className="carrinho-container">
       {usuarioAdmin && usuarioEstaLogado ? (
@@ -159,8 +168,13 @@ const Carrinho = () => {
         >
           <h2>Meu Carrinho</h2>
           <div className="produtos-lista">{mostrarCarrinho()}</div>
-          <div className="total">
-            <h3>Total: R$ {calcularTotal()}</h3>
+          <div className="carrinho-footer">
+            <div className="total">
+              <h3>Total: R$ {calcularTotal()}</h3>
+            </div>
+            <button className="finalizar-compra" onClick={finalizarCompra}>
+              Finalizar Compra
+            </button>
           </div>
         </div>
       </div>
