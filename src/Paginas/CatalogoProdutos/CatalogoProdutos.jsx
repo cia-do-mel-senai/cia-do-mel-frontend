@@ -73,7 +73,7 @@ const CatalogoProdutos = () => {
   return (
     <div className="catalogo-container">
       <div className="produtos-container">
-        <h2>Catalogo</h2>
+        <h2>Catálogo</h2>
         <div className="filtragem">
           <label htmlFor="filtragem-catalogo">Filtro:</label>
           <select

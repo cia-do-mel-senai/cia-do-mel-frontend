@@ -1,18 +1,28 @@
 import React from "react";
 import { MdDelete, MdRemove, MdAdd } from "react-icons/md";
 
-const ProdutoCarrinho = ({ produto, onAdicionar, onDiminuir, onRemover }) => {
+const ProdutoCarrinho = ({
+  produto,
+  quantidade,
+  onAdicionar,
+  onDiminuir,
+  onRemover,
+}) => {
   return (
     <div className="produto">
-      <img src={produto.imagem} alt={produto.nome} className="produto-imagem" />
+      <img
+        src={produto.imagem_produto}
+        alt={produto.nome_produto}
+        className="produto-imagem"
+      />
       <div className="produto-info">
-        <p>{produto.nome}</p>
-        <p>{`R$ ${produto.preco.toFixed(2)}`}</p>
+        <p>{produto.nome_produto}</p>
+        <p>{`R$ ${Number(produto.preco_produto).toFixed(2)}`}</p>
         <div className="produto-controle">
           <button onClick={() => onDiminuir(produto)}>
             <MdRemove size={20} />
           </button>
-          <span>{produto.quantidade}</span>
+          <span>{quantidade}</span>
           <button onClick={() => onAdicionar(produto)}>
             <MdAdd size={20} />
           </button>

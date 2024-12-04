@@ -2,7 +2,7 @@
   width: 100vw;
   height: 10vh;
   background-color: var(--cor-preto);
-  color: white;
+  color: rgb(209, 176, 84);
 }
 
 .rodape h3 {

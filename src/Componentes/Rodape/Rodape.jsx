@@ -10,7 +10,7 @@ const Rodape = () => {
   return (
     <footer className="rodape">
       <div className="rodape-contato">
-        <h3 style={{ fontSize: "0.8rem" }}>Contato</h3>
+        <h3 style={{ fontSize: "0.8rem", color: "white" }}>Contato</h3>
         <div>
           <MdLocalPhone size={10} />
           <p>(48) 9999-9999</p>

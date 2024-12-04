@@ -10,14 +10,17 @@ import ProdutoDetalhes from "./Paginas/ProdutoDetalhes/ProdutoDetalhes";
 import CadastroProduto from "./Paginas/CadastroProduto/CadastroProduto";
 import { AppProvider } from "./Componentes/AppContext/AppContext";
 import VerificadorAdmin from "./Componentes/VerificadorAdmin/VerificadorAdmin";
+import { CarrinhoProvider } from "./Componentes/CarrinhoContext/CarrinhoContext";
 
 function Layout() {
   return (
     <div>
       <AppProvider>
-        <Cabecalho />
-        <Outlet />
-        <Rodape />
+        <CarrinhoProvider>
+          <Cabecalho />
+          <Outlet />
+          <Rodape />
+        </CarrinhoProvider>
       </AppProvider>
     </div>
   );

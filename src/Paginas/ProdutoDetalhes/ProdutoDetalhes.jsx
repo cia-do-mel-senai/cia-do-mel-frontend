@@ -7,7 +7,8 @@ import { useAppContext } from "../../Componentes/AppContext/AppContext";
 import Modal from "../../Componentes/Modal/Modal";
 import ModalConfirmar from "../../Componentes/ModalConfirmar/ModalConfirmar";
 import { IoIosArrowBack } from "react-icons/io";
-
+import { useContext } from "react";
+import { CarrinhoContext } from "../../Componentes/CarrinhoContext/CarrinhoContext";
 const ProdutoDetalhes = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,6 +19,7 @@ const ProdutoDetalhes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalExclusaoAberto, setModalExclusaoAberto] = useState(false);
+  const { produtosNoCarrinho, atualizarCarrinho } = useContext(CarrinhoContext);
 
   const abrirModalDeExclusao = () => {
     setModalExclusaoAberto(true); // Abre o modal
@@ -43,7 +45,7 @@ const ProdutoDetalhes = () => {
     const pegarProduto = async () => {
       try {
         const produtoData = await servicoProduto.buscarProduto(id);
-        console.log(produtoData);
+
         setProduto(produtoData[0]);
       } catch (error) {
         console.error("Erro ao buscar o produto", error);
@@ -59,7 +61,6 @@ const ProdutoDetalhes = () => {
         modalAberto,
         modalMensagem
       );
-      console.log(produtoData);
     } catch (error) {
       console.error("Erro ao buscar o produto", error);
     }
@@ -67,7 +68,6 @@ const ProdutoDetalhes = () => {
   const excluirProduto = async (id, navigate) => {
     try {
       const produtoData = await servicoProduto.excluirProduto(id, navigate);
-      console.log(produtoData);
     } catch (error) {
       console.error("Erro ao excluir o produto", error);
     }
@@ -88,33 +88,23 @@ const ProdutoDetalhes = () => {
   };
 
   const adicionarProdutoCarrinho = () => {
-    let produtosNoCarrinho = JSON.parse(localStorage.getItem("carrinho"));
-    if (!produtosNoCarrinho) {
-      produtosNoCarrinho = [];
-      produtosNoCarrinho.push({
-        id: produto.id_produto,
-        quantidade: quantidade,
-      });
-      localStorage.setItem("carrinho", JSON.stringify(produtosNoCarrinho));
-      console.log(produtosNoCarrinho);
-      setModalMessage("Produto adicionado no carrinho.");
-      setIsModalOpen(true);
-      return;
-    }
-    let produtoJaNoCarrinho = false;
-    produtosNoCarrinho.map((produtoCarrinho) => {
-      if (produtoCarrinho.id === produto) {
-        produtoCarrinho.quantidade += quantidade;
-        produtoJaNoCarrinho = true;
-      }
-    });
-    if (!produtoJaNoCarrinho) {
-      produtosNoCarrinho.push({
+    let produtosNoCarrinhoAtualizados = [...produtosNoCarrinho];
+    const produtoNoCarrinhoIndex = produtosNoCarrinhoAtualizados.findIndex(
+      (produtoCarrinho) => produtoCarrinho.id === produto.id_produto
+    );
+
+    if (produtoNoCarrinhoIndex >= 0) {
+      produtosNoCarrinhoAtualizados[produtoNoCarrinhoIndex].quantidade +=
+        quantidade;
+    } else {
+      produtosNoCarrinhoAtualizados.push({
         id: produto.id_produto,
         quantidade: quantidade,
       });
     }
-    localStorage.setItem("carrinho");
+
+    atualizarCarrinho(produtosNoCarrinhoAtualizados);
+
     setModalMessage("Produto adicionado no carrinho.");
     setIsModalOpen(true);
   };

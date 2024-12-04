@@ -1,52 +1,126 @@
 import "./Carrinho.css";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import ProdutoCarrinho from "../ProdutoCarrinho/ProdutoCarrinho";
+import ServicoProduto from "../../services/ServicoProduto";
+import { CarrinhoContext } from "../CarrinhoContext/CarrinhoContext";
 
 const Carrinho = () => {
   const [carrinhoVisible, setCarrinhoVisible] = useState(false);
   const [produtos, setProdutos] = useState([]);
+  const { produtosNoCarrinho, atualizarCarrinho } = useContext(CarrinhoContext);
+  const servicoProduto = new ServicoProduto();
 
-  // Função para adicionar produto
+  useEffect(() => {
+    // Carregar os produtos da API
+    const pegarProdutos = async () => {
+      try {
+        const produtosData = await servicoProduto.listar();
+        setProdutos(produtosData);
+      } catch (error) {
+        console.error("Erro ao buscar os produtos", error);
+      }
+    };
+    pegarProdutos();
+  }, []);
+
+  useEffect(() => {
+    // Função que obtém o carrinho do localStorage
+    const obterCarrinho = () => {
+      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      console.log("Carrinho carregado do localStorage:", carrinho); // Log de depuração
+      atualizarCarrinho(carrinho); // Atualiza o estado com os itens do carrinho
+    };
+
+    obterCarrinho(); // Carrega o carrinho ao inicializar o componente
+
+    const handleStorageChange = () => {
+      console.log("localStorage mudou!"); // Log de depuração
+      obterCarrinho(); // Atualiza o estado quando o localStorage mudar
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const mostrarCarrinho = () => {
+    return produtosNoCarrinho.map((produtoCarrinho) => {
+      const produto = produtos.find(
+        (produto) => produtoCarrinho.id === produto.id_produto
+      );
+      if (produto) {
+        return (
+          <ProdutoCarrinho
+            key={produtoCarrinho.id}
+            quantidade={produtoCarrinho.quantidade}
+            produto={produto}
+            onAdicionar={adicionarProduto}
+            onRemover={removerProduto}
+            onDiminuir={diminuirProduto}
+          />
+        );
+      }
+      return null;
+    });
+  };
+
   const adicionarProduto = (produto) => {
-    setProdutos((prevProdutos) =>
-      prevProdutos.map((item) =>
-        item.id === produto.id
-          ? { ...item, quantidade: item.quantidade + 1 }
-          : item
-      )
+    const updatedCarrinho = produtosNoCarrinho.map((item) =>
+      item.id === produto.id_produto
+        ? { ...item, quantidade: item.quantidade + 1 }
+        : item
     );
+
+    if (!updatedCarrinho.find((item) => item.id === produto.id_produto)) {
+      updatedCarrinho.push({
+        id: produto.id_produto,
+        quantidade: 1,
+      });
+    }
+
+    atualizarCarrinho(updatedCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(updatedCarrinho));
   };
 
-  // Função para remover produto
   const removerProduto = (produto) => {
-    setProdutos((prevProdutos) =>
-      prevProdutos
-        .map((item) =>
-          item.id === produto.id
-            ? { ...item, quantidade: item.quantidade - 1 }
-            : item
-        )
-        .filter((item) => item.quantidade > 0)
-    );
-  };
-
-  // Função para diminuir produto
-  const diminuirProduto = (produto) => {
-    setProdutos((prevProdutos) =>
-      prevProdutos.map((item) =>
-        item.id === produto.id && item.quantidade > 1
+    const updatedCarrinho = produtosNoCarrinho
+      .map((item) =>
+        item.id === produto.id_produto
           ? { ...item, quantidade: item.quantidade - 1 }
           : item
       )
-    );
+      .filter((item) => item.quantidade > 0); // Remove os produtos com quantidade 0
+
+    atualizarCarrinho(updatedCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(updatedCarrinho));
   };
 
-  // Calcular o total do carrinho
+  const diminuirProduto = (produto) => {
+    const updatedCarrinho = produtosNoCarrinho.map((item) =>
+      item.id === produto.id_produto && item.quantidade > 1
+        ? { ...item, quantidade: item.quantidade - 1 }
+        : item
+    );
+
+    atualizarCarrinho(updatedCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(updatedCarrinho));
+  };
+
   const calcularTotal = () => {
-    return produtos
-      .reduce((total, produto) => total + produto.preco * produto.quantidade, 0)
-      .toFixed(2);
+    let valorTotal = 0;
+    produtosNoCarrinho.forEach((produtoCarrinho) => {
+      const produto = produtos.find(
+        (produto) => produtoCarrinho.id === produto.id_produto
+      );
+      if (produto) {
+        valorTotal +=
+          Number(produto.preco_produto) * Number(produtoCarrinho.quantidade);
+      }
+    });
+    return valorTotal.toFixed(2);
   };
 
   return (
@@ -65,18 +139,8 @@ const Carrinho = () => {
         <div
           className={`carrinho ${carrinhoVisible ? "carrinho-animacao" : ""}`}
         >
-          <h2>Carrinho de Compras</h2>
-          <div className="produtos-lista">
-            {produtos.map((produto) => (
-              <ProdutoCarrinho
-                key={produto.id}
-                produto={produto}
-                onAdicionar={adicionarProduto}
-                onRemover={removerProduto}
-                onDiminuir={diminuirProduto}
-              />
-            ))}
-          </div>
+          <h2>Meu Carrinho</h2>
+          <div className="produtos-lista">{mostrarCarrinho()}</div>
           <div className="total">
             <h3>Total: R$ {calcularTotal()}</h3>
           </div>
