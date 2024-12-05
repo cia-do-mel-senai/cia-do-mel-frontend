@@ -52,7 +52,7 @@ const Principal = () => {
           }}
           onClick={() => navigate("/catalogo-produto")}
         >
-          Ver Todos
+          Ver Produtos
         </button>
       </div>
       <div className="texto-pagina-principal">

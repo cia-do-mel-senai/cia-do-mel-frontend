@@ -20,7 +20,6 @@ const CadastroProduto = () => {
 
       reader.onloadend = () => {
         setImagem(reader.result);
-        console.log(reader.result);
       };
 
       reader.readAsDataURL(arquivo);
@@ -39,8 +38,6 @@ const CadastroProduto = () => {
       preco: preco,
       imagem: imagem,
     };
-
-    console.log(produto);
 
     servicoProduto.cadastrar(produto, setIsModalOpen, setModalMessage);
 
@@ -64,7 +61,7 @@ const CadastroProduto = () => {
           value={nome}
         />
         <label htmlFor="descricao-cadastro-produto">Descricao:</label>
-        <input
+        <textarea
           type="text"
           id="descricao-cadastro-produto"
           placeholder="Digite a descrição do produto."

@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
-import "./ModalConfirmar.css"; // Importando o arquivo de estilo
+import "./ModalConfirmar.css";
 
 const ModalConfirmar = ({ isOpen, message, onClose, onConfirm }) => {
-  if (!isOpen) return null; // Não renderiza o modal se não estiver aberto
+  if (!isOpen) return null;
 
   return (
     <div className="modal-exclusao-overlay" onClick={onClose}>
@@ -23,8 +22,8 @@ const ModalConfirmar = ({ isOpen, message, onClose, onConfirm }) => {
           <button
             className="modal-exclusao-confirm-btn"
             onClick={() => {
-              onConfirm(); // Chama a função onConfirm quando o usuário confirma
-              onClose(); // Fecha o modal após confirmação
+              onConfirm();
+              onClose();
             }}
           >
             Confirmar

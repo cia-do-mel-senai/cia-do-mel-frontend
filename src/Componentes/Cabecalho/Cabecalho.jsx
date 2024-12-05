@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Menu from "../Menu/Menu";
 import "./Cabecalho.css";
 
@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 const Cabecalho = () => {
   const navigate = useNavigate();
   const [pesquisa, setPesquisa] = useState("");
-
+  const location = useLocation();
   const checarEnter = (e) => {
     if (e.key === "Enter") {
       navigate(`/catalogo-produto?busca=${encodeURIComponent(pesquisa)}`);
@@ -27,10 +27,25 @@ const Cabecalho = () => {
         <input
           type="text"
           placeholder="ZzZzz....."
+          value={pesquisa}
           onChange={(e) => setPesquisa(e.target.value)}
           onKeyDown={(e) => checarEnter(e)}
         />
+        {pesquisa && (
+          <button
+            className="botao-limpar"
+            onClick={() => {
+              setPesquisa("");
+              if (location.pathname === "/catalogo-produto") {
+                navigate("/catalogo-produto");
+              }
+            }}
+          >
+            &times;
+          </button>
+        )}
       </div>
+
       <div>
         <Carrinho />
       </div>

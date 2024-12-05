@@ -33,21 +33,17 @@ const Menu = () => {
     navigate("/");
   };
 
-  // Cria uma referência para o menu
   const menuRef = useRef(null);
 
-  // Função para detectar cliques fora do menu
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setMenuVisible(false); // Fecha o menu se o clique for fora dele
+      setMenuVisible(false);
     }
   };
 
   useEffect(() => {
-    // Adiciona o listener de clique fora
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Remove o listener quando o componente for desmontado
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -58,10 +54,9 @@ const Menu = () => {
       <div className="menu-container">
         <FaBars size={30} onClick={() => setMenuVisible(!menuVisible)} />
 
-        {/* Menu com referência */}
         <div
           className={`menu ${menuVisible ? "menu-animacao" : ""}`}
-          ref={menuRef} // Atribui a referência ao menu
+          ref={menuRef}
         >
           <ul>
             <li

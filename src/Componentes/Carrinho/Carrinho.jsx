@@ -43,18 +43,16 @@ const Carrinho = () => {
   }, []);
 
   useEffect(() => {
-    // Função que obtém o carrinho do localStorage
     const obterCarrinho = () => {
       const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      console.log("Carrinho carregado do localStorage:", carrinho); // Log de depuração
-      atualizarCarrinho(carrinho); // Atualiza o estado com os itens do carrinho
+
+      atualizarCarrinho(carrinho);
     };
 
-    obterCarrinho(); // Carrega o carrinho ao inicializar o componente
+    obterCarrinho();
 
     const handleStorageChange = () => {
-      console.log("localStorage mudou!"); // Log de depuração
-      obterCarrinho(); // Atualiza o estado quando o localStorage mudar
+      obterCarrinho();
     };
 
     window.addEventListener("storage", handleStorageChange);

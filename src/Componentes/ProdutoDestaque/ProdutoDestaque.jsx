@@ -12,7 +12,7 @@ const ProdutoDestaque = ({ imagem, nome, id }) => {
         <b>{nome}</b>
       </p>
       <button onClick={() => navigate(`/produto-detalhes/${id}`)}>
-        Ver Mais <IoMdSearch size={20} />
+        Detalhes <IoMdSearch size={20} />
       </button>
     </div>
   );

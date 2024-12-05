@@ -22,11 +22,11 @@ const ProdutoDetalhes = () => {
   const { produtosNoCarrinho, atualizarCarrinho } = useContext(CarrinhoContext);
 
   const abrirModalDeExclusao = () => {
-    setModalExclusaoAberto(true); // Abre o modal
+    setModalExclusaoAberto(true);
   };
 
   const fecharModalDeExclusao = () => {
-    setModalExclusaoAberto(false); // Fecha o modal
+    setModalExclusaoAberto(false);
   };
 
   useEffect(() => {
@@ -228,7 +228,7 @@ const ProdutoDetalhes = () => {
               className="adicionar-produto-detalhes-botoes"
               onClick={() => diminuirQuantidade()}
             >
-              -
+              <span className="icone">-</span>
             </button>
             <input
               type="text"
@@ -240,13 +240,13 @@ const ProdutoDetalhes = () => {
               className="adicionar-produto-detalhes-botoes"
               onClick={() => aumentarQuantidade()}
             >
-              +
+              <span className="icone">+</span>
             </button>
             <button
               className="botao-adicionar-produto-detalhes"
               onClick={adicionarProdutoCarrinho}
             >
-              Adicionar
+              <span>Adicionar</span>
               <MdOutlineShoppingCart />
             </button>
           </div>

@@ -12,7 +12,6 @@ class ServicoUsuario {
       }
 
       const dados = await resposta.json();
-      console.log(dados);
     } catch (error) {
       console.error(error);
     }

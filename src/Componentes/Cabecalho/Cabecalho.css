@@ -17,21 +17,38 @@
 .cabecalho-pesquisar {
   display: flex;
   align-items: center;
+  position: relative;
   width: 35%;
 }
 
 .pesquisar-icone {
   position: absolute;
-  margin: 5px;
+  margin-left: 10px;
   color: grey;
 }
 
 .cabecalho-pesquisar input {
-  padding: 2px;
-  padding-left: 20px;
+  padding: 2px 30px 2px 30px;
   border-radius: 20px;
   border: 1px grey solid;
   width: 100%;
+}
+
+.botao-limpar {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: grey;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.botao-limpar:hover {
+  color: var(--cor-amarelo);
 }
 
 .cabecalho-pesquisar input::placeholder {
