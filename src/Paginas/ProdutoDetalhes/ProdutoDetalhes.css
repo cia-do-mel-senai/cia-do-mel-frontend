@@ -19,17 +19,18 @@
   padding-top: 40px;
   padding-bottom: 40px;
   gap: 10px;
+  position: relative;
 }
 .detalhes-voltar {
-  align-self: flex-start;
+  position: absolute;
+  top: 2%;
+  left: 2%;
   padding: 0;
   color: var(--cor-amarelo);
-  position: absolute;
-  top: 15%;
-  left: 5%;
+  align-self: flex-start;
 }
 .produto-detalhes img {
-  height: auto;
+  max-height: 300px;
   width: 80%;
   border-radius: 30px;
 }
@@ -112,6 +113,7 @@
   padding-bottom: 40px;
   gap: 10px;
   color: white;
+  position: relative;
 }
 .editar-produto-detalhes input {
   width: 100%;

@@ -13,6 +13,7 @@
   transform: translateY(-20px);
   border-radius: 30px;
   color: black;
+  z-index: 1000;
 }
 .menu-animacao {
   opacity: 1;

@@ -30,6 +30,7 @@ const Menu = () => {
     setUsuarioAdmin(false);
     setMenuVisible(false);
     localStorage.removeItem("logado");
+    localStorage.removeItem("carrinho");
     navigate("/");
   };
 
@@ -106,7 +107,7 @@ const Menu = () => {
                 }}
               >
                 <IoBagAddSharp size={20} />
-                Cadastrar
+                Novo produto
               </li>
             )}
           </ul>

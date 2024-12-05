@@ -112,12 +112,12 @@ const ProdutoDetalhes = () => {
   if (usuarioEstaLogado && usuarioAdmin) {
     return (
       <div className="produto-detalhes-container">
-        <IoIosArrowBack
-          className="detalhes-voltar"
-          size={40}
-          onClick={() => navigate("/catalogo-produto")}
-        />
         <div className="editar-produto-detalhes">
+          <IoIosArrowBack
+            className="detalhes-voltar"
+            size={40}
+            onClick={() => navigate("/catalogo-produto")}
+          />
           <img src={produto.imagem_produto} alt="" />
           <input
             type="file"
@@ -204,12 +204,12 @@ const ProdutoDetalhes = () => {
   } else {
     return (
       <div className="produto-detalhes-container">
-        <IoIosArrowBack
-          className="detalhes-voltar"
-          size={40}
-          onClick={() => navigate("/catalogo-produto")}
-        />
         <div className="produto-detalhes">
+          <IoIosArrowBack
+            className="detalhes-voltar"
+            size={40}
+            onClick={() => navigate("/catalogo-produto")}
+          />
           <img src={produto.imagem_produto} alt="" />
           <p>{produto.nome_produto}</p>
           <p
