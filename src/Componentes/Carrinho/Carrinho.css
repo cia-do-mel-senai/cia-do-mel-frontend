@@ -33,6 +33,10 @@
   justify-content: space-between; /* Deixar o footer fixo no final */
 }
 
+.carrinho h2 {
+  margin-top: 50px;
+}
+
 .carrinho-animacao {
   opacity: 1;
   transform: translateX(0);
@@ -118,4 +122,9 @@ h2 {
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 20px;
+}
+.carrinho-voltar {
+  position: absolute;
+  top: 2%;
+  left: 2%;
 }

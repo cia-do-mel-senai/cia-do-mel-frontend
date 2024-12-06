@@ -7,6 +7,7 @@ import { CarrinhoContext } from "../CarrinhoContext/CarrinhoContext";
 import { GrUserAdmin } from "react-icons/gr";
 import { useAppContext } from "../AppContext/AppContext";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 const Carrinho = () => {
   const [carrinhoVisible, setCarrinhoVisible] = useState(false);
@@ -164,6 +165,11 @@ const Carrinho = () => {
         <div
           className={`carrinho ${carrinhoVisible ? "carrinho-animacao" : ""}`}
         >
+          <IoIosArrowBack
+            className="carrinho-voltar"
+            size={40}
+            onClick={() => setCarrinhoVisible(false)}
+          />
           <h2>Meu Carrinho</h2>
           <div className="produtos-lista">{mostrarCarrinho()}</div>
           <div className="carrinho-footer">

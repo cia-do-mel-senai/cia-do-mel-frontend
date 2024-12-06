@@ -67,7 +67,7 @@ const Menu = () => {
               }}
             >
               <GiBeehive />
-              Catalogo
+              Catálogo
             </li>
             {!usuarioEstaLogado && (
               <>
@@ -92,13 +92,6 @@ const Menu = () => {
               </>
             )}
 
-            {usuarioEstaLogado && (
-              <li onClick={() => deslogar()}>
-                <IoLogOutSharp size={20} />
-                Sair
-              </li>
-            )}
-
             {usuarioEstaLogado && usuarioAdmin && (
               <li
                 onClick={() => {
@@ -107,7 +100,14 @@ const Menu = () => {
                 }}
               >
                 <IoBagAddSharp size={20} />
-                Novo produto
+                Cadastro Produto
+              </li>
+            )}
+
+            {usuarioEstaLogado && (
+              <li onClick={() => deslogar()}>
+                <IoLogOutSharp size={20} />
+                Sair
               </li>
             )}
           </ul>
