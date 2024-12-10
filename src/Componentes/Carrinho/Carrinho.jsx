@@ -163,14 +163,21 @@ const Carrinho = () => {
   return (
     <>
       <div className="carrinho-container">
-        {usuarioAdmin && usuarioEstaLogado ? (
-          <GrUserAdmin size={30} />
-        ) : (
-          <MdOutlineShoppingCart
-            size={30}
-            onClick={() => setCarrinhoVisible(!carrinhoVisible)}
-          />
-        )}
+        <div className="carrinho-icone">
+          {usuarioAdmin && usuarioEstaLogado ? (
+            <GrUserAdmin size={30} />
+          ) : (
+            <MdOutlineShoppingCart
+              size={30}
+              onClick={() => setCarrinhoVisible(!carrinhoVisible)}
+            />
+          )}
+          {produtosNoCarrinho.length > 0 ? (
+            <div className="carrinho-com-produto">
+              {produtosNoCarrinho.length}
+            </div>
+          ) : null}
+        </div>
 
         <div
           className={`${carrinhoVisible ? "carrinho-fundo" : ""}`}
