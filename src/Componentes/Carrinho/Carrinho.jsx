@@ -8,6 +8,7 @@ import { GrUserAdmin } from "react-icons/gr";
 import { useAppContext } from "../AppContext/AppContext";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
+import Modal from "../Modal/Modal";
 
 const Carrinho = () => {
   const [carrinhoVisible, setCarrinhoVisible] = useState(false);
@@ -16,6 +17,8 @@ const Carrinho = () => {
   const servicoProduto = new ServicoProduto();
   const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
   const [usuarioAdmin, setUsuarioAdmin] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -141,48 +144,68 @@ const Carrinho = () => {
     if (!usuarioEstaLogado) {
       setCarrinhoVisible(false);
       navigate("/login-usuario");
+      return;
     }
+    if (produtosNoCarrinho.length < 1) {
+      setModalMessage("Coloque algum produto no carrinho.");
+      setIsModalOpen(true);
+      setCarrinhoVisible(false);
+      navigate("catalogo-produto");
+      return;
+    }
+    localStorage.removeItem("carrinho");
+    atualizarCarrinho([]);
+    setModalMessage("Pedido feito com sucesso, você será contatado no email.");
+    setIsModalOpen(true);
+    setCarrinhoVisible(false);
   };
 
   return (
-    <div className="carrinho-container">
-      {usuarioAdmin && usuarioEstaLogado ? (
-        <GrUserAdmin size={30} />
-      ) : (
-        <MdOutlineShoppingCart
-          size={30}
-          onClick={() => setCarrinhoVisible(!carrinhoVisible)}
-        />
-      )}
-
-      <div
-        className={`${carrinhoVisible ? "carrinho-fundo" : ""}`}
-        onClick={(e) => {
-          if (e.target.className === "carrinho-fundo")
-            setCarrinhoVisible(!carrinhoVisible);
-        }}
-      >
-        <div
-          className={`carrinho ${carrinhoVisible ? "carrinho-animacao" : ""}`}
-        >
-          <IoIosArrowBack
-            className="carrinho-voltar"
-            size={40}
-            onClick={() => setCarrinhoVisible(false)}
+    <>
+      <div className="carrinho-container">
+        {usuarioAdmin && usuarioEstaLogado ? (
+          <GrUserAdmin size={30} />
+        ) : (
+          <MdOutlineShoppingCart
+            size={30}
+            onClick={() => setCarrinhoVisible(!carrinhoVisible)}
           />
-          <h2>Meu Carrinho</h2>
-          <div className="produtos-lista">{mostrarCarrinho()}</div>
-          <div className="carrinho-footer">
-            <div className="total">
-              <h3>Total: R$ {calcularTotal()}</h3>
+        )}
+
+        <div
+          className={`${carrinhoVisible ? "carrinho-fundo" : ""}`}
+          onClick={(e) => {
+            if (e.target.className === "carrinho-fundo")
+              setCarrinhoVisible(!carrinhoVisible);
+          }}
+        >
+          <div
+            className={`carrinho ${carrinhoVisible ? "carrinho-animacao" : ""}`}
+          >
+            <IoIosArrowBack
+              className="carrinho-voltar"
+              size={40}
+              onClick={() => setCarrinhoVisible(false)}
+            />
+            <h2>Meu Carrinho</h2>
+            <div className="produtos-lista">{mostrarCarrinho()}</div>
+            <div className="carrinho-footer">
+              <div className="total">
+                <h3>Total: R$ {calcularTotal()}</h3>
+              </div>
+              <button className="finalizar-compra" onClick={finalizarCompra}>
+                Fazer pedido
+              </button>
             </div>
-            <button className="finalizar-compra" onClick={finalizarCompra}>
-              Finalizar Compra
-            </button>
           </div>
         </div>
       </div>
-    </div>
+      <Modal
+        isOpen={isModalOpen}
+        message={modalMessage}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 
