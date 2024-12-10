@@ -1,10 +1,12 @@
 .produto-detalhes-container {
-  height: 80vh;
+  min-height: 80vh;
   background-color: var(--cor-fundo);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .produto-detalhes {
   width: 80%;
