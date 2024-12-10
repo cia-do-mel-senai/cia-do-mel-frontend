@@ -59,6 +59,7 @@ const ProdutoCatalogo = ({ imagem, nome, preco, idProduto }) => {
             width: "100%",
             alignItems: "center",
             gap: "10px",
+            justifyContent: "center",
           }}
         >
           <button onClick={() => navigate(`/produto-detalhes/${idProduto}`)}>
