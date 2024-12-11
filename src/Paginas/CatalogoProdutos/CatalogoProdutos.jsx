@@ -20,6 +20,7 @@ const CatalogoProdutos = () => {
       }
     };
     pegarProdutos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filtrar = (filtro) => {
@@ -44,6 +45,8 @@ const CatalogoProdutos = () => {
         produtosFiltrados = produtosFiltrados
           .sort((a, b) => a.nome_produto.localeCompare(b.nome_produto))
           .reverse();
+        break;
+      default:
         break;
     }
     const params = new URLSearchParams(location.search);
@@ -81,6 +84,7 @@ const CatalogoProdutos = () => {
             id="filtragem-catalogo"
             onChange={(e) => setFiltro(e.target.value)}
           >
+            <option value="">Sem filtro</option>
             <option value="crescente">Preço crescente</option>
             <option value="descrescente">Preço decrescente</option>
             <option value="a-z">Ordenar de A a Z</option>

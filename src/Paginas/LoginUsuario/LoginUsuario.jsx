@@ -43,6 +43,7 @@ const LoginUsuario = () => {
       atualizarUsuarioEstaLogado
     );
   };
+
   return (
     <div className="cadastro-usuario-container">
       <div className="cadastro-usuario-inputs">

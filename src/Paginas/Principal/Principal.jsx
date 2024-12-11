@@ -3,7 +3,6 @@ import ProdutoDestaque from "../../Componentes/ProdutoDestaque/ProdutoDestaque";
 import "./Principal.css";
 import { useEffect, useState } from "react";
 import ServicoProduto from "../../services/ServicoProduto";
-import Carrossel from "../../Componentes/Carrossel/Carrossel";
 
 const Principal = () => {
   const navigate = useNavigate();
@@ -21,11 +20,11 @@ const Principal = () => {
       }
     };
     pegarProdutos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="principal-container">
-      {/* <Carrossel></Carrossel> */}
       <div className="produtos-destaque-principal">
         <div className="produtos-destaque">
           {produtos.map((produto, index) => {

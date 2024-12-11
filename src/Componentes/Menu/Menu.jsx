@@ -1,17 +1,19 @@
 import "./Menu.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { FaUserCheck, FaUserPlus, FaBars } from "react-icons/fa";
 import { GiBeehive } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import { IoLogOutSharp } from "react-icons/io5";
 import { useAppContext } from "../AppContext/AppContext";
 import { IoBagAddSharp } from "react-icons/io5";
+import { CarrinhoContext } from "../CarrinhoContext/CarrinhoContext";
 
 const Menu = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const { usuarioEstaLogado, atualizarUsuarioEstaLogado } = useAppContext();
   const [usuarioAdmin, setUsuarioAdmin] = useState(false);
   const navigate = useNavigate();
+  const { atualizarCarrinho } = useContext(CarrinhoContext);
 
   useEffect(() => {
     const logado = JSON.parse(localStorage.getItem("logado")) || null;
@@ -30,7 +32,7 @@ const Menu = () => {
     setUsuarioAdmin(false);
     setMenuVisible(false);
     localStorage.removeItem("logado");
-    localStorage.removeItem("carrinho");
+    atualizarCarrinho([]);
     navigate("/");
   };
 

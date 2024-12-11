@@ -14,7 +14,7 @@ const CadastroUsuario = () => {
   const [modalMessage, setModalMessage] = useState("");
   const servicoUsuario = new ServicoUsuario();
 
-  const criarUsuario = () => {
+  const criarUsuario = async () => {
     if (
       !nome.trim() ||
       !email.trim() ||
@@ -25,6 +25,7 @@ const CadastroUsuario = () => {
       setIsModalOpen(true);
       return;
     }
+
     const emailRegex = new RegExp(
       "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
     );
@@ -52,7 +53,12 @@ const CadastroUsuario = () => {
       senha: senha,
     };
 
-    servicoUsuario.cadastrar(usuario, navigate);
+    try {
+      await servicoUsuario.cadastrar(usuario, navigate);
+    } catch (error) {
+      setModalMessage(error.message);
+      setIsModalOpen(true);
+    }
   };
 
   return (

@@ -23,7 +23,7 @@ const ProdutoCatalogo = ({ imagem, nome, preco, idProduto }) => {
 
   const excluirProduto = async (id, navigate) => {
     try {
-      const produtoData = await servicoProduto.excluirProduto(id, navigate);
+      await servicoProduto.excluirProduto(id, navigate);
       location.reload();
     } catch (error) {
       console.error("Erro ao excluir o produto", error);

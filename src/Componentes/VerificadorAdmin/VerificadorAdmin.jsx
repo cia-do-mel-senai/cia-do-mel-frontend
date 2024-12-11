@@ -9,6 +9,7 @@ const checarAdm = () => {
   }
 };
 
+// eslint-disable-next-line react/prop-types
 const VerificadorAdmin = ({ children }) => {
   const adminLogado = checarAdm();
   if (!adminLogado) {

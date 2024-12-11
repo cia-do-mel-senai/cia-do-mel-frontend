@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 const CarrinhoContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 const CarrinhoProvider = ({ children }) => {
   const [produtosNoCarrinho, setProdutosNoCarrinho] = useState([]);
 

@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import { MdDelete, MdRemove, MdAdd } from "react-icons/md";
 
 const ProdutoCarrinho = ({

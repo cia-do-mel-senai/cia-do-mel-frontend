@@ -21,10 +21,6 @@ const ProdutoDetalhes = () => {
   const [modalExclusaoAberto, setModalExclusaoAberto] = useState(false);
   const { produtosNoCarrinho, atualizarCarrinho } = useContext(CarrinhoContext);
 
-  const abrirModalDeExclusao = () => {
-    setModalExclusaoAberto(true);
-  };
-
   const fecharModalDeExclusao = () => {
     setModalExclusaoAberto(false);
   };
@@ -52,22 +48,19 @@ const ProdutoDetalhes = () => {
       }
     };
     pegarProduto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const editarProduto = async (produto, modalAberto, modalMensagem) => {
     try {
-      const produtoData = await servicoProduto.editarProduto(
-        produto,
-        modalAberto,
-        modalMensagem
-      );
+      await servicoProduto.editarProduto(produto, modalAberto, modalMensagem);
     } catch (error) {
       console.error("Erro ao buscar o produto", error);
     }
   };
   const excluirProduto = async (id, navigate) => {
     try {
-      const produtoData = await servicoProduto.excluirProduto(id, navigate);
+      await servicoProduto.excluirProduto(id, navigate);
     } catch (error) {
       console.error("Erro ao excluir o produto", error);
     }
@@ -116,7 +109,7 @@ const ProdutoDetalhes = () => {
           <IoIosArrowBack
             className="detalhes-voltar"
             size={40}
-            onClick={() => navigate("/catalogo-produto")}
+            onClick={() => navigate(-1)}
           />
           <img src={produto.imagem_produto} alt="" />
           <input

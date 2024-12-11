@@ -34,7 +34,6 @@ const Carrinho = () => {
   }, [usuarioEstaLogado, atualizarUsuarioEstaLogado]);
 
   useEffect(() => {
-    // Carregar os produtos da API
     const pegarProdutos = async () => {
       try {
         const produtosData = await servicoProduto.listar();
@@ -44,6 +43,7 @@ const Carrinho = () => {
       }
     };
     pegarProdutos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -64,6 +64,7 @@ const Carrinho = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const mostrarCarrinho = () => {

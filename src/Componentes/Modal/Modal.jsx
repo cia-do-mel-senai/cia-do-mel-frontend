@@ -1,5 +1,6 @@
 import "./Modal.css";
 
+// eslint-disable-next-line react/prop-types
 const Modal = ({ isOpen, message, onClose }) => {
   if (!isOpen) return null;
 

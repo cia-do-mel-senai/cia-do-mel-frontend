@@ -1,32 +1,23 @@
 import instanciaApi from "./Api";
 
 class ServicoUsuario {
-  async listar() {
-    try {
-      const resposta = await fetch("http://localhost:3000/usuarios", {
-        method: "GET",
-      });
-
-      if (!resposta.ok) {
-        throw new Error(`Erro: ${resposta.status} - ${resposta.statusText}`);
-      }
-
-      const dados = await resposta.json();
-    } catch (error) {
-      console.error(error);
-    }
-  }
   async cadastrar(usuario, navigate) {
     try {
       const response = await instanciaApi.post("/usuarios", usuario);
 
-      if (response.status !== 200) {
-        throw new Error(response.data.mensagem || "Erro desconhecido");
+      if (response.status === 201) {
+        navigate("/login-usuario");
       }
-      navigate("/login-usuario");
     } catch (error) {
-      console.error("Erro ao listar os produtos:", error);
-      throw error;
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.mensagem
+      ) {
+        throw new Error(error.response.data.mensagem);
+      } else {
+        throw new Error("Erro desconhecido. Tente novamente mais tarde.");
+      }
     }
   }
   async logar(
@@ -39,15 +30,23 @@ class ServicoUsuario {
     try {
       const response = await instanciaApi.post("/logar", usuario);
 
-      if (response.status !== 200) {
+      if (response.status === 200) {
+        localStorage.setItem("logado", JSON.stringify(response.data.usuario));
+        atualizarUsuarioLogado(true);
+        navigate("/catalogo-produto");
+      } else {
         throw new Error(response.data.mensagem || "Erro desconhecido");
       }
-
-      localStorage.setItem("logado", JSON.stringify(response.data.usuario));
-      atualizarUsuarioLogado(true);
-      navigate("/catalogo-produto");
     } catch (error) {
-      modalMensagem(`${String(error).replace("Error: ", "")}`);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.mensagem
+      ) {
+        modalMensagem(error.response.data.mensagem);
+      } else {
+        modalMensagem("Erro desconhecido. Tente novamente mais tarde.");
+      }
       modalAberto(true);
     }
   }

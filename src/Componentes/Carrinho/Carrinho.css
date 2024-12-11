@@ -1,4 +1,3 @@
-/* Carrinho.css */
 .carrinho-container {
   position: relative;
 }
@@ -26,11 +25,11 @@
   transition: ease-in 500ms;
   transform: translateX(20px);
   z-index: 1001;
-  overflow-y: auto; /* Para evitar transbordo dos produtos */
+  overflow-y: auto; 
   padding: 20px;
   display: flex;
-  flex-direction: column; /* Organizar elementos em coluna */
-  justify-content: space-between; /* Deixar o footer fixo no final */
+  flex-direction: column; 
+  justify-content: space-between; 
 }
 
 .carrinho h2 {
@@ -47,8 +46,8 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex: 1; /* Permitir que a lista de produtos ocupe o espaço disponível */
-  overflow-y: auto; /* Permitir scroll caso necessário */
+  flex: 1; 
+  overflow-y: auto; 
 }
 
 .produto {
@@ -105,7 +104,7 @@ h2 {
   font-weight: bold;
 }
 .carrinho-footer {
-  position: sticky; /* Mantém o footer fixo no final da visualização */
+  position: sticky; 
   bottom: 0;
   background-color: rgb(70, 70, 70);
   padding: 20px 0;

@@ -1,5 +1,6 @@
 import "./ModalConfirmar.css";
 
+// eslint-disable-next-line react/prop-types
 const ModalConfirmar = ({ isOpen, message, onClose, onConfirm }) => {
   if (!isOpen) return null;
 
